@@ -27,18 +27,71 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <?php
+        $dir = ROOT . DS . 'src' . DS . 'Template' . DS . 'Element' . DS . 'adminLTE' . DS;
+        $element = $dir . 'header.ctp';
+        if (file_exists($element)) {
+            ob_start();
+            include_once $element;
+            echo ob_get_clean();
+        } else {
+            echo $this->Element('header');
+        }
+        ?>
+    </header>
+    <!-- /.main-header -->
 
-    <!--    HEADER -->
-    <?php echo $this->Element('header'); ?>
-    <!--    BOX SIDEBAR_LEFT -->
-    <?php echo $this->Element('sidebar_left'); ?>
-    <!--    BOX SIDEBAR_RIGHT -->
-    <?php echo $this->Element('sidebar_right'); ?>
-    <!--    BOX LEFT -->
-    <!--    --><?php //echo $this->Element('box_left'); ?>
-    <?php echo $this->fetch('content'); ?>
-    <!--    BOX RIGHT -->
-    <!--    --><?php //echo $this->Element('box_right'); ?>
+    <!-- MAIN SIDEBAR -->
+    <aside class="main-sidebar">
+        <?php
+        $element = $dir . 'sidebar_left.ctp';
+        if (file_exists($element)) {
+            ob_start();
+            include_once $element;
+            echo ob_get_clean();
+        } else {
+            echo $this->Element('sidebar_left');
+        }
+        ?>
+    </aside>
+    <!-- /.main-sidebar -->
+
+    <!-- CONTROL SIDEBAR -->
+    <?php
+    $element = $dir . 'sidebar_right.ctp';
+    if (file_exists($element)) {
+        ob_start();
+        include_once $element;
+        echo ob_get_clean();
+    } else {
+        echo $this->Element('sidebar_right');
+    }
+    ?><!-- /.control-sidebar -->
+
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
+        <?php echo $this->fetch('content'); ?>
+        <?php echo $this->Element('box_left'); ?>
+        <?php echo $this->Element('box_right'); ?>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <?php
+        $element = $dir . 'footer.ctp';
+        if (file_exists($element)) {
+            ob_start();
+            include_once $element;
+            echo ob_get_clean();
+        } else {
+            echo $this->Element('footer');
+        }
+        ?>
+    </footer>
+    <!-- /.footer-->
 </div>
 <!-- ./wrapper -->
 
